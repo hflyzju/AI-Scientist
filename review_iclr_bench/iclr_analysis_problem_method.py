@@ -8,7 +8,7 @@ sys.path.append("../")
 sys.path.append('/Users/huxiang/Documents/GitHub/Research/ResearchAgent/')
 
 
-from ai_scientist.perform_review import (
+from ai_scientist.perform_review_with_problem_and_method import (
     load_paper,
     perform_review,
     reviewer_system_prompt_neg,
@@ -114,19 +114,13 @@ def parse_arguments():
 llm_cols = [
     "paper_id",
     "Summary",
-    "Questions",
-    "Limitations",
-    "Ethical Concerns",
     "Soundness",
-    "Presentation",
     "Contribution",
     "Overall",
     "Confidence",
     "Strengths",
-    "Weaknesses",
     "Originality",
     "Quality",
-    "Clarity",
     "Significance",
     "Decision",
 ]
@@ -204,14 +198,15 @@ def get_perf_metrics(llm_ratings, ore_ratings):
         y_pred.append(llm_ratings["Decision"].loc[name] == "Accept")
         y_true.append(ore_ratings["simplified_decision"].loc[name] == "Accept")
 
-    accuracy = correct / num_llm_reviews
+    eps = 0.0000000001
+    accuracy = correct / (num_llm_reviews + eps)
     accuracy = round(accuracy, 2)
     f1 = round(f1_score(y_true, y_pred), 2)
     try:
         roc = round(roc_auc_score(y_true, y_pred), 2)
         tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
-        fpr = fp / (fp + tn)
-        fnr = fn / (fn + tp)
+        fpr = fp / (fp + tn + eps)
+        fnr = fn / (fn + tp + eps)
 
     except Exception:
         roc = 0
@@ -304,9 +299,8 @@ def review_single_paper(
         return {"idx": idx, "review": None}
     try:
         logger.info(f"Generating review for {rating.name}, use_only_problem_and_method_for_review={args.use_only_problem_and_method_for_review}")
-        if 1:
-        # if args.use_only_problem_and_method_for_review < 1:
-        #     # raise NotImplemented
+        if args.use_only_problem_and_method_for_review < 1:
+            # raise NotImplemented
             txt_path = f"iclr_parsed/{rating.name}.txt"
             if not os.path.exists(txt_path):
                 pdf_path = download_paper_pdf(rating.url, rating.name, verbose=False)
@@ -316,12 +310,10 @@ def review_single_paper(
             else:
                 with open(txt_path, "r") as f:
                     text = f.read()
-        # else:
-        if 0:
+        else:
             problem_method_json_file = f"iclr_idea_extract/{rating.name}_problem_method.json"
             problem_method = load_json_from_file(problem_method_json_file)
-            # text = f"Problem: {problem_method['problem']}\nMethod: {problem_method['method']}\n"
-            text = f"Title: {problem_method['title']}\nAbstract: {problem_method['abstract']}\n"
+            text = f"Problem: {problem_method['problem']}\nMethod: {problem_method['method']}\n"
         logger.info(f"Generated review for {rating.name}, text:{text[:100]}")
 
     except Exception as e:
@@ -490,8 +482,7 @@ if __name__ == "__main__":
     logger.info(f"Running with arguments: {args}")
     # Create client - float temp as string
     temperature = str(args.temperature).replace(".", "_")
-    # rating_fname = f"llm_reviews/our0909_title_abstract_{args.model}_temp_{temperature}"
-    rating_fname = f"llm_reviews/our0909_all_paper_{args.model}_temp_{temperature}"
+    rating_fname = f"llm_reviews/our0908_new_prompt_{args.model}_temp_{temperature}"
     pathlib.Path("llm_reviews/").mkdir(parents=True, exist_ok=True)
 
     if args.num_fs_examples > 0:
@@ -504,8 +495,8 @@ if __name__ == "__main__":
 
     if args.num_reviews_ensemble > 1:
         rating_fname += f"_ensemble_{args.num_reviews_ensemble}"
-    # if args.use_only_problem_and_method_for_review >= 1:
-    #     rating_fname += f"_only_problem_and_method_{args.use_only_problem_and_method_for_review}"
+    if args.use_only_problem_and_method_for_review >= 1:
+        rating_fname += f"_only_problem_and_method_{args.use_only_problem_and_method_for_review}"
 
     num_paper_pages = None if args.num_paper_pages == 0 else args.num_paper_pages
     if num_paper_pages is not None:

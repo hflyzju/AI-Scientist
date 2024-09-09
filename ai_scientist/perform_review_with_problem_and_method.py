@@ -24,7 +24,7 @@ def save_json_data_to_file(file_path: str, data: dict):
         json.dump(data, file)
 
 reviewer_system_prompt_base = (
-    "You are an AI researcher who is reviewing a paper that was submitted to a prestigious ML venue."
+    "You are an AI researcher who is reviewing a paper(only the research problem and method are given) that was submitted to a prestigious ML venue."
     "Be critical and cautious in your decision."
 )
 
@@ -56,16 +56,10 @@ Treat this as the note-taking phase of your review.
 In <JSON>, provide the review in JSON format with the following fields in the order:
 - "Summary": A summary of the paper content and its contributions.
 - "Strengths": A list of strengths of the paper.
-- "Weaknesses": A list of weaknesses of the paper.
 - "Originality": A rating from 1 to 4 (low, medium, high, very high).
 - "Quality": A rating from 1 to 4 (low, medium, high, very high).
-- "Clarity": A rating from 1 to 4 (low, medium, high, very high).
 - "Significance": A rating from 1 to 4 (low, medium, high, very high).
-- "Questions": A set of clarifying questions to be answered by the paper authors.
-- "Limitations": A set of limitations and potential negative societal impacts of the work.
-- "Ethical Concerns": A boolean value indicating whether there are ethical concerns.
 - "Soundness": A rating from 1 to 4 (poor, fair, good, excellent).
-- "Presentation": A rating from 1 to 4 (poor, fair, good, excellent).
 - "Contribution": A rating from 1 to 4 (poor, fair, good, excellent).
 - "Overall": A rating from 1 to 10 (very strong reject to award quality).
 - "Confidence": A rating from 1 to 5 (low, medium, high, very high, absolute).
@@ -82,50 +76,36 @@ Below is a description of the questions you will be asked on the review form for
 When writing your review, please keep in mind that after decisions have been made, reviews and meta-reviews of accepted papers and opted-in rejected papers will be made public. 
 
 1. Summary: Briefly summarize the paper and its contributions. This is not the place to critique the paper; the authors should generally agree with a well-written summary.
-  - Strengths and Weaknesses: Please provide a thorough assessment of the strengths and weaknesses of the paper, touching on each of the following dimensions:
+  - Strengths: Please provide a thorough assessment of the strengths  of the paper, touching on each of the following dimensions:
   - Originality: Are the tasks or methods new? Is the work a novel combination of well-known techniques? (This can be valuable!) Is it clear how this work differs from previous contributions? Is related work adequately cited
-  - Quality: Is the submission technically sound? Are claims well supported (e.g., by theoretical analysis or experimental results)? Are the methods used appropriate? Is this a complete piece of work or work in progress? Are the authors careful and honest about evaluating both the strengths and weaknesses of their work
-  - Clarity: Is the submission clearly written? Is it well organized? (If not, please make constructive suggestions for improving its clarity.) Does it adequately inform the reader? (Note that a superbly written paper provides enough information for an expert reader to reproduce its results.)
-  - Significance: Are the results important? Are others (researchers or practitioners) likely to use the ideas or build on them? Does the submission address a difficult task in a better way than previous work? Does it advance the state of the art in a demonstrable way? Does it provide unique data, unique conclusions about existing data, or a unique theoretical or experimental approach?
+  - Quality: Is the submission technically sound? Are claims well supported (e.g., by theoretical analysis)? Are the methods used appropriate? Is this a complete piece of work or work in progress? Are the authors careful and honest about evaluating both the strengths and weaknesses of their work
+  - Significance: Are the results important? Are others (researchers or practitioners) likely to use the ideas or build on them? Does the submission address a difficult task in a better way than previous work? Does it advance the state of the art in a demonstrable way? Does it provide unique data, unique conclusions about existing data, or a unique theoretical?
 
-2. Questions: Please list up and carefully describe any questions and suggestions for the authors. Think of the things where a response from the author can change your opinion, clarify a confusion or address a limitation. This can be very important for a productive rebuttal and discussion phase with the authors.  
-
-3. Limitations: Have the authors adequately addressed the limitations and potential negative societal impact of their work? If not, please include constructive suggestions for improvement.
-In general, authors should be rewarded rather than punished for being up front about the limitations of their work and any potential negative societal impact. You are encouraged to think through whether any critical points are missing and provide these as feedback for the authors.
-
-4. Ethical concerns: If there are ethical issues with this paper, please flag the paper for an ethics review. For guidance on when this is appropriate, please review the NeurIPS ethics guidelines.
-
-5. Soundness: Please assign the paper a numerical rating on the following scale to indicate the soundness of the technical claims, experimental and research methodology and on whether the central claims of the paper are adequately supported with evidence.
+2. Soundness: Please assign the paper a numerical rating on the following scale to indicate the soundness of the technical claims,  and research methodology and on whether the central claims of the paper are adequately supported with evidence.
   4: excellent
   3: good
   2: fair
   1: poor
 
-6. Presentation: Please assign the paper a numerical rating on the following scale to indicate the quality of the presentation. This should take into account the writing style and clarity, as well as contextualization relative to prior work.
+3. Contribution: Please assign the paper a numerical rating on the following scale to indicate the quality of the overall contribution this paper makes to the research area being studied. Are the questions being asked important? Does the paper bring a significant originality of ideas and/or execution? Are the results valuable to share with the broader NeurIPS community.
   4: excellent
   3: good
   2: fair
   1: poor
 
-7. Contribution: Please assign the paper a numerical rating on the following scale to indicate the quality of the overall contribution this paper makes to the research area being studied. Are the questions being asked important? Does the paper bring a significant originality of ideas and/or execution? Are the results valuable to share with the broader NeurIPS community.
-  4: excellent
-  3: good
-  2: fair
-  1: poor
+4. Overall: Please provide an "overall score" for this submission. Choices: 
+  10: Award quality: Technically flawless paper with groundbreaking impact on one or more areas of AI.
+  9: Very Strong Accept: Technically flawless paper with groundbreaking impact on at least one area of AI and excellent impact on multiple areas of AI, with flawless .
+  8: Strong Accept: Technically strong paper with, with novel ideas, excellent impact on at least one area of AI or high-to-excellent impact on multiple areas of AI, with excellent .
+  7: Accept: Technically solid paper, with high impact on at least one sub-area of AI or moderate-to-high impact on more than one area of AI, with good-to-excellent .
+  6: Weak Accept: Technically solid, moderate-to-high impact paper.
+  5: Borderline accept: Technically solid paper where reasons to accept outweigh reasons to reject, e.g.
+  4: Borderline reject: Technically solid paper where reasons to reject, e.g..
+  3: Reject: For instance, a paper with technical flaws.
+  2: Strong Reject: For instance, a paper with major technical flaws, .
+  1: Very Strong Reject: For instance, a paper with trivial results
 
-8. Overall: Please provide an "overall score" for this submission. Choices: 
-  10: Award quality: Technically flawless paper with groundbreaking impact on one or more areas of AI, with exceptionally strong evaluation, reproducibility, and resources, and no unaddressed ethical considerations.
-  9: Very Strong Accept: Technically flawless paper with groundbreaking impact on at least one area of AI and excellent impact on multiple areas of AI, with flawless evaluation, resources, and reproducibility, and no unaddressed ethical considerations.
-  8: Strong Accept: Technically strong paper with, with novel ideas, excellent impact on at least one area of AI or high-to-excellent impact on multiple areas of AI, with excellent evaluation, resources, and reproducibility, and no unaddressed ethical considerations.
-  7: Accept: Technically solid paper, with high impact on at least one sub-area of AI or moderate-to-high impact on more than one area of AI, with good-to-excellent evaluation, resources, reproducibility, and no unaddressed ethical considerations.
-  6: Weak Accept: Technically solid, moderate-to-high impact paper, with no major concerns with respect to evaluation, resources, reproducibility, ethical considerations.
-  5: Borderline accept: Technically solid paper where reasons to accept outweigh reasons to reject, e.g., limited evaluation. Please use sparingly.
-  4: Borderline reject: Technically solid paper where reasons to reject, e.g., limited evaluation, outweigh reasons to accept, e.g., good evaluation. Please use sparingly.
-  3: Reject: For instance, a paper with technical flaws, weak evaluation, inadequate reproducibility and incompletely addressed ethical considerations.
-  2: Strong Reject: For instance, a paper with major technical flaws, and/or poor evaluation, limited impact, poor reproducibility and mostly unaddressed ethical considerations.
-  1: Very Strong Reject: For instance, a paper with trivial results or unaddressed ethical considerations
-
-9. Confidence:  Please provide a "confidence score" for your assessment of this submission to indicate how confident you are in your evaluation. Choices:
+5. Confidence:  Please provide a "confidence score" for your assessment of this submission to indicate how confident you are in your evaluation. Choices:
   5: You are absolutely certain about your assessment. You are very familiar with the related work and checked the math/other details carefully.
   4: You are confident in your assessment, but not absolutely certain. It is unlikely, but not impossible, that you did not understand some parts of the submission or that you are unfamiliar with some pieces of related work.
   3: You are fairly confident in your assessment. It is possible that you did not understand some parts of the submission or that you are unfamiliar with some pieces of related work. Math/other details were not carefully checked.
@@ -150,6 +130,7 @@ def perform_review(
     review_instruction_form=neurips_form,
     args=None,
 ):
+    # import pdb;pdb.set_trace()
     logger.info(f"Performing review | num_fs_examples: {num_fs_examples}, args:{args}")
     if num_fs_examples > 0:
         if args is not None and args.use_only_problem_and_method_for_review:
@@ -162,35 +143,28 @@ def perform_review(
 
 
     logger.info("Generating review, args: %s", args)
-#     if args is not None and args.use_only_problem_and_method_for_review:
-#         logger.info("Using only problem and method for review")
-#         base_prompt += f"""
-# Here You will give the Research problem and method of the paper, not the whole paper.
-# Attention: the problem and method are driven by the title and the abstract of the paper, rather than the whole paper,
-# so you do't need expected to the detail method or detail experiments, please focuns on the general problem and method
-# and give the review of the paper.
-# you are asked to review:
-# ```
-# {text}
-# ```
-# """
-#     else:
-#         logger.info("Using full paper for review")
-    base_prompt += f"""
+    if args is not None and args.use_only_problem_and_method_for_review:
+        logger.info("Using only problem and method for review")
+        base_prompt += f"""
+Here You will give the Research problem and method of the paper, not the whole paper.
+Attention: the problem and method are driven by the title and the abstract of the paper, rather than the whole paper,
+so you do't need expected to the detail method or detail experiments, please focuns on the general problem and method
+and give the review of the paper.
+you are asked to review:
+```
+{text}
+```
+"""
+    else:
+        logger.info("Using full paper for review")
+        base_prompt += f"""
 Here is the paper you are asked to review:
 ```
 {text}
 ```"""
 
-#     base_prompt += f"""
-# Here You will give the title and abstract of the paper, not the whole paper.
-# so you do't need expected to the detail method or detail experiments, please give the review of the paper.
-# ```
-# {text}
-# ```
-# """
-
     if num_reviews_ensemble > 1:
+        # import pdb;pdb.set_trace()
         llm_review, msg_histories = get_batch_responses_from_llm(
             base_prompt,
             model=model,
@@ -209,6 +183,7 @@ Here is the paper you are asked to review:
             except Exception as e:
                 print(f"Ensemble review {idx} failed: {e}")
         parsed_reviews = [r for r in parsed_reviews if r is not None]
+        # import pdb;pdb.set_trace()
         review = get_meta_review(model, client, temperature, parsed_reviews)
 
         # take first valid in case meta-reviewer fails
@@ -219,10 +194,8 @@ Here is the paper you are asked to review:
         for score, limits in [
             ("Originality", (1, 4)),
             ("Quality", (1, 4)),
-            ("Clarity", (1, 4)),
             ("Significance", (1, 4)),
             ("Soundness", (1, 4)),
-            ("Presentation", (1, 4)),
             ("Contribution", (1, 4)),
             ("Overall", (1, 10)),
             ("Confidence", (1, 5)),
@@ -343,6 +316,7 @@ def load_paper(pdf_path, num_pages=None, min_size=100):
 def load_review(path):
     with open(path, "r") as json_file:
         loaded = json.load(json_file)
+    print(loaded.keys())
     return loaded["review"]
 
 
@@ -382,6 +356,7 @@ Note that while each review is formatted differently according to each reviewer'
             problem_method_path = paper.replace(".pdf", "_problem_method.json")
             problem_method_data = load_json_data_from_file(problem_method_path)
             paper_text = f"Problem:{problem_method_data['problem']}\nMethod:{problem_method_data['method']}"
+            review = review.replace(".json", "_problem_method_review.json")
         review_text = load_review(review)
         fewshot_prompt += f"""
 Paper:

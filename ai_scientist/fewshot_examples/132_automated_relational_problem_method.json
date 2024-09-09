@@ -1,0 +1,4 @@
+{
+  "problem": "How can we efficiently learn with a small amount of data on new tasks while addressing the challenge of task heterogeneity, which is not well-handled by traditional globally shared meta-learning methods?",
+  "method": "We propose an automated relational meta-learning (ARML) framework that automatically extracts cross-task relations and constructs a meta-knowledge graph. When a new task arrives, the framework quickly identifies the most relevant structure and tailors the learned structure knowledge to the meta-learner. This approach addresses task heterogeneity and increases model interpretability."
+}
