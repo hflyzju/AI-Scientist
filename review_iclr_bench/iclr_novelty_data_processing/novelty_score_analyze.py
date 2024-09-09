@@ -24,7 +24,8 @@ print(df2.columns)
 # f3 = "../llm_reviews/0909_gpt-4o_temp_0_1_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = '../llm_reviews/0909_problem_method_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
-f3 = "../llm_reviews/0909_title_abstract_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
+# f3 = "../llm_reviews/0909_title_abstract_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
+f3 = "../llm_reviews/0909_title_abstract_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/our0908_gpt-4o_temp_0_1_fewshot_3_reflect_5_num_reviews_500_ensemble_5_only_problem_and_method_1_pages_all.csv"
 # f3 = "../llm_reviews/our0908_new_prompt_gpt-4o_temp_0_1_fewshot_3_reflect_5_num_reviews_500_ensemble_5_only_problem_and_method_1_pages_all.csv"
 df3 = pd.read_csv(f3, sep=',')
