@@ -23,7 +23,10 @@ print(df2.columns)
 # f3 = "../llm_reviews/gpt-4o-2024-05-13_temp_0_1_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_gpt-4o_temp_0_1_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
-f3 = '../llm_reviews/0909_problem_method_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+# f3 = '../llm_reviews/0909_problem_method_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+# f3 = '../llm_reviews/0909_problem_method_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+# f3 = '../llm_reviews/0909_problem_method_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+f3 = '../llm_reviews/0909_problem_method_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
 # f3 = "../llm_reviews/0909_title_abstract_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
