@@ -36,7 +36,8 @@ print(df2.columns)
 # f3 = "../llm_reviews/0910_task_motivation_method_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0910_task_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = '../llm_reviews/0910_motivation_method_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
-f3 = '../llm_reviews/0910_motivation_method_v1_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+# f3 = '../llm_reviews/0910_motivation_method_v1_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+f3 = '../llm_reviews/0910_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_500_reflect_5_ensemble_5_pages_all.csv'
 # f3 = "../llm_reviews/0909_title_abstract_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
