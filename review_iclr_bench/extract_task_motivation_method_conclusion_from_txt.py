@@ -106,7 +106,7 @@ def open_review_validate(
                 save_json_data_to_file(result, problem_method_extract_file)
 
         i += 1
-        if i > 20:
+        if i > 500:
             break
 
 
