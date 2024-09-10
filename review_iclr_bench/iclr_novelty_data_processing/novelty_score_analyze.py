@@ -34,7 +34,9 @@ print(df2.columns)
 # f3 = "../llm_reviews/0910_task_motivation_method_v1_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0910_task_motivation_method_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0910_task_motivation_method_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
-f3 = "../llm_reviews/0910_task_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
+# f3 = "../llm_reviews/0910_task_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
+# f3 = '../llm_reviews/0910_motivation_method_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
+f3 = '../llm_reviews/0910_motivation_method_v1_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
 # f3 = "../llm_reviews/0909_title_abstract_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
@@ -63,6 +65,9 @@ print(df1_merged.columns)
 
 for human_mean_feature in ['mean_technical_novelty_and_significance', 'mean_empirical_novelty_and_significance']:
     df1_merged[human_mean_feature].fillna(df1_merged[human_mean_feature].mean(), inplace=True)
+# for machine_feature in ["Soundness", "Originality","Quality","Significance", "Overall"]:
+#     df1_merged[machine_feature].fillna(df1_merged[machine_feature].mean(), inplace=True)
+
 
 
 for human_mean_feature in ['mean_technical_novelty_and_significance', 'mean_empirical_novelty_and_significance']:
