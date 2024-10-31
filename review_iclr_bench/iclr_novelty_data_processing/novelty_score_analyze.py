@@ -37,7 +37,8 @@ print(df2.columns)
 # f3 = "../llm_reviews/0910_task_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = '../llm_reviews/0910_motivation_method_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
 # f3 = '../llm_reviews/0910_motivation_method_v1_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv'
-f3 = '../llm_reviews/0910_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_500_reflect_5_ensemble_5_pages_all.csv'
+# f3 = '../llm_reviews/0910_motivation_method_v4_gpt-4o_temp_0_1_num_reviews_500_reflect_5_ensemble_5_pages_all.csv'
+f3 = "../llm_reviews/0910_title_abstract_v1_gpt-4o_temp_0_1_num_reviews_500_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v2_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v3_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
 # f3 = "../llm_reviews/0909_title_abstract_v4_gpt-4o_temp_0_1_num_reviews_20_reflect_5_ensemble_5_pages_all.csv"
@@ -79,18 +80,20 @@ for human_mean_feature in ['mean_technical_novelty_and_significance', 'mean_empi
         print(f"human_mean_feature:{human_mean_feature}, machine_feature:{machine_feature}, md:{md}, pc:{pc}")
 
 
-# for human_mean_feature in ['mean_technical_novelty_and_significance', 'mean_empirical_novelty_and_significance']:
-#     if human_mean_feature == "mean_empirical_novelty_and_significance":
-#         df1_merged[human_mean_feature].fillna(df1_merged[human_mean_feature].mean(), inplace=True)
-#         print(1)
-#     for i in range(10):
-#         df1_merged["Ori_Sig"] = df1_merged["Originality"] * (i / 10.0) + df1_merged["Significance"] * ((10 - i) / 10.0)
-#         ML_Feature_Key = "Ori_Sig"
-#         md = manhattan_distance(df1_merged[human_mean_feature], df1_merged[ML_Feature_Key])
-#         pc = pearson_correlation(df1_merged[human_mean_feature], df1_merged[ML_Feature_Key])
-#         print(
-#             f"weight:{i / 10.0}, human_mean_feature:{human_mean_feature}, machine_feature:{ML_Feature_Key}, md:{md}, pc:{pc}")
-#
-#
+
+
+for human_mean_feature in ['mean_technical_novelty_and_significance', 'mean_empirical_novelty_and_significance']:
+    # if human_mean_feature == "mean_empirical_novelty_and_significance":
+    #     df1_merged[human_mean_feature].fillna(df1_merged[human_mean_feature].mean(), inplace=True)
+    #     print(1)
+    for i in range(10):
+        df1_merged["Ori_Sig"] = df1_merged["Originality"] * (i / 10.0) + df1_merged["Significance"] * ((10 - i) / 10.0)
+        ML_Feature_Key = "Ori_Sig"
+        md = manhattan_distance(df1_merged[human_mean_feature], df1_merged[ML_Feature_Key])
+        pc = pearson_correlation(df1_merged[human_mean_feature], df1_merged[ML_Feature_Key])
+        print(
+            f"weight:{i / 10.0}, human_mean_feature:{human_mean_feature}, machine_feature:{ML_Feature_Key}, md:{md}, pc:{pc}")
+
+
 
 
